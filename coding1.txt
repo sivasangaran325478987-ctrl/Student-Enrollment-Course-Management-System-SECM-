@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Enrollment & Course Management</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button{
+            padding: 8px;
+            margin: 5px;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td{
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th{
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Enrollment & Course Management</h2>
+
+<input type="text" id="studentId" placeholder="Student ID">
+<input type="text" id="studentName" placeholder="Student Name">
+<input type="text" id="courseName" placeholder="Course Name">
+<button onclick="addStudent()">Enroll Student</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="studentTable">
+    </tbody>
+</table>
+
+<script>
+function addStudent() {
+    let id = document.getElementById("studentId").value;
+    let name = document.getElementById("studentName").value;
+    let course = document.getElementById("courseName").value;
+
+    if(id === "" || name === "" || course === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let table = document.getElementById("studentTable");
+
+    let row = table.insertRow();
+
+    row.insertCell(0).innerHTML = id;
+    row.insertCell(1).innerHTML = name;
+    row.insertCell(2).innerHTML = course;
+    row.insertCell(3).innerHTML =
+        '<button onclick="deleteRow(this)">Delete</button>';
+
+    document.getElementById("studentId").value = "";
+    document.getElementById("studentName").value = "";
+    document.getElementById("courseName").value = "";
+}
+
+function deleteRow(btn) {
+    let row = btn.parentNode.parentNode;
+    row.remove();
+}
+</script>
+
+</body>
+</html>
